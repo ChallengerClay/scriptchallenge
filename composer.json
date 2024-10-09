@@ -1,0 +1,18 @@
+{
+    "name": "carlo/basic-exercises",
+    "autoload": {
+        "psr-4": {
+            "Carlo\\BasicExercises\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Carlos Guevara",
+            "email": "carlosguevara135@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9",
+        "symfony/dom-crawler": "^6.4"
+    }
+}
