@@ -8,15 +8,15 @@ use GuzzleHttp\Exception\ClientException;
     $url = getopt("u:");
     $order = getopt("o::");
     $client = new Client();
-    try {
-        $response = $client->get($url['u'],[['debug'=>false],'headers' =>['Authorization' => '']]);
-        die(print_r( $response->getBody()->getContents() ));
-    } catch (ClientException $e) {
-        // An exception was raised but there is an HTTP response body
-        // with the exception (in case of 404 and similar errors)
-        $response = $e->getResponse();
-        $responseBodyAsString = $response->getBody()->getContents();
-        echo $response->getStatusCode() . PHP_EOL;
-        echo $responseBodyAsString;
-    }
+    $response = $client->get($url['u']);
+    $body = $response->getBody();
+    $crawler = new Crawler($body);
+    $token =bin2hex(random_bytes(16));
+    $text = array();
+    $bank_list =  $crawler->filter('div.centrado')->each(function ($node, $i) use ($text)  {
+        $text =  ['value'=> $node->text()];
+        return $text;
+    });
+    sort($bank_list);
+    print_r($bank_list);
 ?>
